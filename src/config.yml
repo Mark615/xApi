@@ -1,0 +1,6 @@
+priority:
+    playerfirstjoin:
+        xpermission: 2
+        xlogin: 1
+    playerrankchanged:
+        xpermission: 1
