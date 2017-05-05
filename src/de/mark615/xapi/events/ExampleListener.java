@@ -5,11 +5,11 @@ import org.bukkit.event.Listener;
 
 import de.mark615.xapi.XApi;
 
-public class TestListener implements Listener
+public class ExampleListener implements Listener
 {
 	private XApi plugin;
 	
-	public TestListener(XApi plugin)
+	public ExampleListener(XApi plugin)
 	{
 		this.plugin = plugin;
 		this.plugin.getServer().getPluginManager().registerEvents(this, plugin);
@@ -19,5 +19,11 @@ public class TestListener implements Listener
 	public void onPlayerFirstjoinEvent(PlayerFirstjoinEvent event)
 	{
 		System.out.println("[TEST] player has joined the first time: " + event.getPlayer().getName());
+	}
+	
+	@EventHandler
+	public void onPlayerRankChangedEvent(PlayerRankChangedEvent event)
+	{
+		System.out.println("[TEST] player rank has changed: " + event.getPlayer().getName());
 	}
 }

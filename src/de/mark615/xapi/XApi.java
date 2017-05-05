@@ -2,7 +2,7 @@ package de.mark615.xapi;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.mark615.xapi.events.TestListener;
+import de.mark615.xapi.events.ExampleListener;
 import de.mark615.xapi.interfaces.XPermissionApi;
 
 public class XApi extends JavaPlugin
@@ -21,7 +21,6 @@ public class XApi extends JavaPlugin
 		permApi = null;
 	}
 
-	//enable
 	@Override
 	public void onEnable()
 	{
@@ -29,7 +28,7 @@ public class XApi extends JavaPlugin
 		settings = new SettingManager(this);
 		priority = new PriorityConfig(settings);
 		
-		TestListener listener = new TestListener(this);
+		ExampleListener listener = new ExampleListener(this);
 	}
 	
 	public XApi getInstance()
