@@ -21,6 +21,7 @@ public class XApi extends JavaPlugin
 		permApi = null;
 	}
 
+	//enable
 	@Override
 	public void onEnable()
 	{
