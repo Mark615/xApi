@@ -2,8 +2,8 @@ package de.mark615.xapi;
 
 public class VersionCheck
 {
-	private static int SUPPORTED_XPERMISSION_MIN = 1;
-	private static int SUPPORTED_XPERMISSION_MAX = 2;
+	private final static int SUPPORTED_XPERMISSION_MIN = 1;
+	private final static int SUPPORTED_XPERMISSION_MAX = 2;
 	
 	public static boolean isSupported(XType type, int curVersion)
 	{
@@ -19,6 +19,11 @@ public class VersionCheck
 		}
 		
 		return false;
+	}
+	
+	public static int getXPermissionMax()
+	{ 
+		return SUPPORTED_XPERMISSION_MAX;
 	}
 	
 	public enum XType
