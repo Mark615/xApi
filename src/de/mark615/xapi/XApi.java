@@ -2,11 +2,12 @@ package de.mark615.xapi;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.mark615.xapi.events.ExampleListener;
+import de.mark615.xapi.VersionCheck.XType;
 import de.mark615.xapi.interfaces.XPermissionApi;
 
 public class XApi extends JavaPlugin
 {
+	public static final int BUILD = 1;
 	private static XApi instance;
 	
 	private XPermissionApi permApi;
@@ -28,13 +29,20 @@ public class XApi extends JavaPlugin
 		settings = new SettingManager(this);
 		priority = new PriorityConfig(settings);
 		
-		ExampleListener listener = new ExampleListener(this);
+		//ExampleListener listener = new ExampleListener(this);
 	}
 	
 	public XApi getInstance()
 	{
 		return instance;
 	}
+	
+	public boolean checkVersion(XType type, int version)
+	{
+		return VersionCheck.isSupported(type, version);
+	}
+	
+	
 	
 	public PriorityConfigBase getPriorityConfig()
 	{
