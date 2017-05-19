@@ -6,8 +6,8 @@ Every xPlugin fires events and has interfaces to interact with it through a cost
 
 # Supported xPlugins
 - xPermission
+- xLogin
 
 # soon...
 - xChat
 - xBan(mute)
-- xLogin
