@@ -4,3 +4,5 @@ priority:
         xlogin: 1
     playerrankchanged:
         xpermission: 1
+    playerautorankingchanged:
+        xpermission: 1

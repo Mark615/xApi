@@ -37,4 +37,9 @@ public class PriorityConfig extends PriorityConfigBase
 	{
 		registerPlugin(PriorityConfigBase.XPERMISSION);
 	}
+	
+	public void registerXLogin()
+	{
+		registerPlugin(PriorityConfigBase.XLOGIN);
+	}
 }

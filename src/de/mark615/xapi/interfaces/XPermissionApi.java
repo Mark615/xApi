@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 
 import de.mark615.xapi.PriorityConfigBase;
 import de.mark615.xapi.XApi;
+import de.mark615.xapi.events.PlayerAutoRankingChangedEvent;
 import de.mark615.xapi.events.PlayerFirstjoinEvent;
 import de.mark615.xapi.events.PlayerRankChangedEvent;
 
@@ -32,6 +33,15 @@ public abstract class XPermissionApi implements XPermissionApiInterface
 		if (priorityBase.canCallEvent(PriorityConfigBase.XPERMISSION, PriorityConfigBase.PLAYERRANKCHANGED))
 		{
 			PlayerRankChangedEvent event = new PlayerRankChangedEvent(p, prevrank, rank, auto);
+			plugin.getServer().getPluginManager().callEvent(event);
+		}
+	}
+	
+	public void createPlayerAutoRankingChangedEvent(Player p, boolean value)
+	{
+		if (priorityBase.canCallEvent(PriorityConfigBase.XPERMISSION, PriorityConfigBase.PLAYERAUTORANKINGCHANGED))
+		{
+			PlayerAutoRankingChangedEvent event = new PlayerAutoRankingChangedEvent(p, value);
 			plugin.getServer().getPluginManager().callEvent(event);
 		}
 	}

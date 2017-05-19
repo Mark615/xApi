@@ -7,4 +7,6 @@ public interface XPermissionApiInterface
 	public void setPlayerRankUp(Player sender, Player target);
 	
 	public void setPlayerRankDown(Player sender, Player target);
+	
+	public void setPlayerAutoRankDisabled(Player sender, Player target, boolean value);
 }

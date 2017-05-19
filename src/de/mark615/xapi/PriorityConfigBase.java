@@ -6,9 +6,14 @@ import java.util.Map;
 public class PriorityConfigBase
 {
 	public static final String XPERMISSION = "xpermission";
+	public static final String XLOGIN = "xlogin";
 
 	public static final String PLAYERFIRSTJOIN = "playerfirstjoin";
-	public static final String PLAYERRANKCHANGED = "playerrankchanged"; 
+	public static final String PLAYERRANKCHANGED = "playerrankchanged";
+	public static final String PLAYERAUTORANKINGCHANGED = "playerautorankingchanged";
+	public static final String PLAYERPASSWORDCHANGED = "playerpasswordchanged";
+	public static final String PLAYERPASSWORDRESET = "playerpasswordreset";
+	public static final String PLAYERLOGGEDIN = "playerloggedin";
 	
 	protected Map<String, Map<String, Integer>> prioritys;
 	

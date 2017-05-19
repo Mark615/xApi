@@ -1,0 +1,88 @@
+package de.mark615.xapi.versioncheck;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import de.mark615.xapi.XApi;
+
+public class VersionCheck
+{
+	private static List<XType> xplugins;
+	private static Map<XType, VersionRoot> versions;
+	
+	static
+	{
+		xplugins = new ArrayList<>();
+		versions = new HashMap<>();
+
+		xplugins.add(XType.xPermission);
+		xplugins.add(XType.xLogin);
+		//xplugins.add(XType.xChat);
+		//xplugins.add(XType.xBan);
+		//xplugins.add(XType.xQuest);
+		
+		for (XType type : xplugins)
+		{
+			versions.put(type, new VersionRoot(type, getBuildNodes(type)));
+		}
+	}
+	
+	public static boolean isSupported(XType type, int curVersion)
+	{
+		VersionNode node = versions.get(type).getNodes().get(curVersion);
+		return (node.getMinVersion() <= XApi.BUILD) && (XApi.BUILD <= node.getMaxVersion());
+	}
+	
+	public static boolean isXPluginHigherXApi(XType type, int curBuild)
+	{ 
+		if (versions.get(type).getNodes().get(curBuild) == null)
+			return true;
+		return versions.get(type).getNodes().get(curBuild).getMaxVersion() > XApi.BUILD;
+	}
+	
+	private static HashMap<Integer, VersionNode> getBuildNodes(XType type)
+	{
+		HashMap<Integer, VersionNode> nodes = new HashMap<>();
+		if (type == XType.xPermission)
+		{
+			//xpermission version -> supports -> xapi versions
+			nodes.put(1, new VersionNode(1, 1));
+			nodes.put(2, new VersionNode(1, 2));
+			nodes.put(3, new VersionNode(1, 2));
+			nodes.put(4, new VersionNode(1, 2));
+			return nodes;
+		}
+		
+		if (type == XType.xLogin)
+		{
+			nodes.put(1, new VersionNode(2, 2));
+		}
+		
+		if (type == XType.xChat)
+		{
+			
+		}
+		
+		if (type == XType.xBan)
+		{
+			
+		}
+		
+		if (type == XType.xQuest)
+		{
+			
+		}
+		return null;
+	}
+	
+	public enum XType
+	{
+		xPermission,
+		xLogin,
+		xChat,
+		xBan,
+		xQuest
+	}
+}
