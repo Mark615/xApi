@@ -6,7 +6,7 @@ import java.util.Map;
 public class PriorityConfigBase
 {
 	public static final String XPERMISSION = "xpermission";
-	public static final String XLOGIN = "xlogin";
+	public static final String XSIGNIN = "xsignin";
 
 	public static final String PLAYERFIRSTJOIN = "playerfirstjoin";
 	public static final String PLAYERRANKCHANGED = "playerrankchanged";
@@ -22,19 +22,19 @@ public class PriorityConfigBase
 		this.prioritys = new HashMap<>();
 	}
 	
-	public boolean canCallEvent(String type, String eventKey)
+	public boolean canCallEvent(String plugin, String type)
 	{
 		int callPlugin = 0;
 		int highest = 0;
 		
-		if (prioritys.get(eventKey) == null)
+		if (prioritys.get(type) == null)
 			return false;
 		
-		for (String pluginKey : prioritys.get(eventKey).keySet())
+		for (String pluginKey : prioritys.get(type).keySet())
 		{
-			int now = prioritys.get(eventKey).get(pluginKey);
+			int now = prioritys.get(type).get(pluginKey);
 					
-			if (pluginKey.equalsIgnoreCase(type))
+			if (pluginKey.equalsIgnoreCase(plugin))
 			{
 				callPlugin = now;
 			}

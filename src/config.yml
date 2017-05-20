@@ -1,7 +1,7 @@
 priority:
     playerfirstjoin:
         xpermission: 2
-        xlogin: 1
+        xsignin: 1
     playerrankchanged:
         xpermission: 1
     playerautorankingchanged:

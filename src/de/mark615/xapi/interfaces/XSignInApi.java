@@ -9,12 +9,12 @@ import de.mark615.xapi.events.PlayerLoggedInEvent;
 import de.mark615.xapi.events.PlayerPasswordChangedEvent;
 import de.mark615.xapi.events.PlayerPasswordResetEvent;
 
-public abstract class XLoginApi implements XLoginApiInterface
+public abstract class XSignInApi implements XSignInApiInterface
 {
 	private XApi plugin;
 	private PriorityConfigBase priorityBase;
 	
-	public XLoginApi(XApi plugin)
+	public XSignInApi(XApi plugin)
 	{
 		this.plugin = plugin;
 		this.priorityBase = plugin.getPriorityConfig();
@@ -22,7 +22,7 @@ public abstract class XLoginApi implements XLoginApiInterface
 	
 	public void createPlayerFirstJoinEvent(Player p)
 	{
-		if (priorityBase.canCallEvent(PriorityConfigBase.XLOGIN, PriorityConfigBase.PLAYERFIRSTJOIN))
+		if (priorityBase.canCallEvent(PriorityConfigBase.XSIGNIN, PriorityConfigBase.PLAYERFIRSTJOIN))
 		{
 			PlayerFirstjoinEvent event = new PlayerFirstjoinEvent(p);
 			plugin.getServer().getPluginManager().callEvent(event);
@@ -31,7 +31,7 @@ public abstract class XLoginApi implements XLoginApiInterface
 	
 	public void createPlayerPasswordChangedEvent(Player p)
 	{
-		if (priorityBase.canCallEvent(PriorityConfigBase.XLOGIN, PriorityConfigBase.PLAYERPASSWORDCHANGED))
+		if (priorityBase.canCallEvent(PriorityConfigBase.XSIGNIN, PriorityConfigBase.PLAYERPASSWORDCHANGED))
 		{
 			PlayerPasswordChangedEvent event = new PlayerPasswordChangedEvent(p);
 			plugin.getServer().getPluginManager().callEvent(event);
@@ -40,7 +40,7 @@ public abstract class XLoginApi implements XLoginApiInterface
 	
 	public void createPlayerResetEvent(Player p)
 	{
-		if (priorityBase.canCallEvent(PriorityConfigBase.XLOGIN, PriorityConfigBase.PLAYERPASSWORDRESET))
+		if (priorityBase.canCallEvent(PriorityConfigBase.XSIGNIN, PriorityConfigBase.PLAYERPASSWORDRESET))
 		{
 			PlayerPasswordResetEvent event = new PlayerPasswordResetEvent(p);
 			plugin.getServer().getPluginManager().callEvent(event);
@@ -49,7 +49,7 @@ public abstract class XLoginApi implements XLoginApiInterface
 	
 	public void createPlayerLoggedInEvent(Player p)
 	{
-		if (priorityBase.canCallEvent(PriorityConfigBase.XLOGIN, PriorityConfigBase.PLAYERLOGGEDIN))
+		if (priorityBase.canCallEvent(PriorityConfigBase.XSIGNIN, PriorityConfigBase.PLAYERLOGGEDIN))
 		{
 			PlayerLoggedInEvent event = new PlayerLoggedInEvent(p);
 			plugin.getServer().getPluginManager().callEvent(event);

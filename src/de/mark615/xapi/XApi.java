@@ -2,7 +2,7 @@ package de.mark615.xapi;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.mark615.xapi.interfaces.XLoginApi;
+import de.mark615.xapi.interfaces.XSignInApi;
 import de.mark615.xapi.interfaces.XPermissionApi;
 import de.mark615.xapi.versioncheck.VersionCheck;
 import de.mark615.xapi.versioncheck.VersionCheck.XType;
@@ -13,7 +13,7 @@ public class XApi extends JavaPlugin
 	private static XApi instance;
 	
 	private XPermissionApi permApi;
-	private XLoginApi loginApi;
+	private XSignInApi signinApi;
 	
 	private PriorityConfig priority;
 	private SettingManager settings;
@@ -63,15 +63,15 @@ public class XApi extends JavaPlugin
 		return permApi;
 	}
 	
-	public void registerXLogin(XLoginApi api)
+	public void registerXSignIn(XSignInApi api)
 	{
-		loginApi = api;
-		priority.registerXLogin();
+		signinApi = api;
+		priority.registerXSignIn();
 	}
 	
-	public XLoginApi getXLoginApi()
+	public XSignInApi getXSignInApi()
 	{
-		return loginApi;
+		return signinApi;
 	}
 
 }

@@ -2,7 +2,7 @@ package de.mark615.xapi.interfaces;
 
 import org.bukkit.entity.Player;
 
-public interface XLoginApiInterface
+public interface XSignInApiInterface
 {
 	public boolean resetPlayer(Player sender, Player target);
 	
