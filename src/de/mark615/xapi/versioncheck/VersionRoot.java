@@ -24,4 +24,9 @@ public class VersionRoot
 	{
 		return this.nodes;
 	}
+
+	public VersionNode getHighestNode()
+	{
+		return this.nodes.get(this.nodes.size() - 1);
+	}
 }

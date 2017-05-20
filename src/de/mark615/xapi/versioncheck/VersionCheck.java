@@ -18,7 +18,7 @@ public class VersionCheck
 		versions = new HashMap<>();
 
 		xplugins.add(XType.xPermission);
-		xplugins.add(XType.xLogin);
+		xplugins.add(XType.xSignIn);
 		//xplugins.add(XType.xChat);
 		//xplugins.add(XType.xBan);
 		//xplugins.add(XType.xQuest);
@@ -32,6 +32,8 @@ public class VersionCheck
 	public static boolean isSupported(XType type, int curVersion)
 	{
 		VersionNode node = versions.get(type).getNodes().get(curVersion);
+		if (node == null)
+			node = versions.get(type).getHighestNode();
 		return (node.getMinVersion() <= XApi.BUILD) && (XApi.BUILD <= node.getMaxVersion());
 	}
 	
@@ -50,14 +52,16 @@ public class VersionCheck
 			//xpermission version -> supports -> xapi versions
 			nodes.put(1, new VersionNode(1, 1));
 			nodes.put(2, new VersionNode(1, 2));
-			nodes.put(3, new VersionNode(1, 2));
-			nodes.put(4, new VersionNode(1, 2));
+			nodes.put(3, new VersionNode(1, 3));
+			nodes.put(4, new VersionNode(1, 3));
 			return nodes;
 		}
 		
-		if (type == XType.xLogin)
+		if (type == XType.xSignIn)
 		{
 			nodes.put(1, new VersionNode(2, 2));
+			nodes.put(2, new VersionNode(3, 3));
+			return nodes;
 		}
 		
 		if (type == XType.xChat)
@@ -80,7 +84,7 @@ public class VersionCheck
 	public enum XType
 	{
 		xPermission,
-		xLogin,
+		xSignIn,
 		xChat,
 		xBan,
 		xQuest

@@ -9,7 +9,7 @@ import de.mark615.xapi.versioncheck.VersionCheck.XType;
 
 public class XApi extends JavaPlugin
 {
-	public static final int BUILD = 2;
+	public static final int BUILD = 3;
 	private static XApi instance;
 	
 	private XPermissionApi permApi;
@@ -31,6 +31,8 @@ public class XApi extends JavaPlugin
 		instance = this;
 		settings = new SettingManager(this);
 		priority = new PriorityConfig(settings);
+		
+		System.out.println("[xApi] started");
 		
 		//ExampleListener listener = new ExampleListener(this);
 	}
