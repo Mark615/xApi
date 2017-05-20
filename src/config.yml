@@ -6,3 +6,9 @@ priority:
         xpermission: 1
     playerautorankingchanged:
         xpermission: 1
+    playerpasswordchanged:
+        xsignin: 1
+    playerpasswordreset:
+        xsignin: 1
+    playerloggedin:
+        xsignin: 1
