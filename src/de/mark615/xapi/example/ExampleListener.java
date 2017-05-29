@@ -1,9 +1,11 @@
-package de.mark615.xapi.events;
+package de.mark615.xapi.example;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 import de.mark615.xapi.XApi;
+import de.mark615.xapi.events.PlayerFirstjoinEvent;
+import de.mark615.xapi.events.PlayerRankChangedEvent;
 
 public class ExampleListener implements Listener
 {

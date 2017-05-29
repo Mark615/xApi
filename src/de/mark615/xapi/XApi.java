@@ -1,9 +1,12 @@
 package de.mark615.xapi;
 
+import java.util.HashMap;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.mark615.xapi.interfaces.XSignInApi;
 import de.mark615.xapi.interfaces.XPermissionApi;
+import de.mark615.xapi.interfaces.XPlugin;
+import de.mark615.xapi.interfaces.XSignInApi;
 import de.mark615.xapi.versioncheck.VersionCheck;
 import de.mark615.xapi.versioncheck.VersionCheck.XType;
 
@@ -12,8 +15,7 @@ public class XApi extends JavaPlugin
 	public static final int BUILD = 3;
 	private static XApi instance;
 	
-	private XPermissionApi permApi;
-	private XSignInApi signinApi;
+	private HashMap<XType, XPlugin> xpluginlist;
 	
 	private PriorityConfig priority;
 	private SettingManager settings;
@@ -22,13 +24,14 @@ public class XApi extends JavaPlugin
 	@Override
 	public void onDisable()
 	{
-		permApi = null;
+		xpluginlist.clear();
 	}
 
 	@Override
 	public void onEnable()
 	{
 		instance = this;
+		xpluginlist = new HashMap<>();
 		settings = new SettingManager(this);
 		priority = new PriorityConfig(settings);
 		
@@ -56,24 +59,19 @@ public class XApi extends JavaPlugin
 	
 	public void registerXPermission(XPermissionApi api)
 	{
-		permApi = api;
+		xpluginlist.put(XType.xPermission, api);
 		priority.registerXPermission();
-	}
-	
-	public XPermissionApi getXPermissionApi()
-	{
-		return permApi;
 	}
 	
 	public void registerXSignIn(XSignInApi api)
 	{
-		signinApi = api;
+		xpluginlist.put(XType.xSignIn, api);
 		priority.registerXSignIn();
 	}
 	
-	public XSignInApi getXSignInApi()
+	public XPlugin getXPlugin(XType type)
 	{
-		return signinApi;
+		return xpluginlist.get(type);
 	}
 
 }

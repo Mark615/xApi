@@ -8,15 +8,11 @@ import de.mark615.xapi.events.PlayerAutoRankingChangedEvent;
 import de.mark615.xapi.events.PlayerFirstjoinEvent;
 import de.mark615.xapi.events.PlayerRankChangedEvent;
 
-public abstract class XPermissionApi implements XPermissionApiInterface
+public abstract class XPermissionApi extends XPlugin implements XPermissionApiInterface
 {
-	private XApi plugin;
-	private PriorityConfigBase priorityBase;
-	
 	public XPermissionApi(XApi plugin)
 	{
-		this.plugin = plugin;
-		this.priorityBase = plugin.getPriorityConfig();
+		super(plugin);
 	}
 	
 	public void createPlayerFirstjoinEvent(Player p)

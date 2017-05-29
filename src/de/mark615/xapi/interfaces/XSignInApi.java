@@ -9,15 +9,11 @@ import de.mark615.xapi.events.PlayerLoggedInEvent;
 import de.mark615.xapi.events.PlayerPasswordChangedEvent;
 import de.mark615.xapi.events.PlayerPasswordResetEvent;
 
-public abstract class XSignInApi implements XSignInApiInterface
+public abstract class XSignInApi extends XPlugin implements XSignInApiInterface
 {
-	private XApi plugin;
-	private PriorityConfigBase priorityBase;
-	
 	public XSignInApi(XApi plugin)
 	{
-		this.plugin = plugin;
-		this.priorityBase = plugin.getPriorityConfig();
+		super(plugin);
 	}
 	
 	public void createPlayerFirstJoinEvent(Player p)
