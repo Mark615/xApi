@@ -12,7 +12,8 @@ import de.mark615.xapi.versioncheck.VersionCheck.XType;
 
 public class XApi extends JavaPlugin
 {
-	public static final int BUILD = 3;
+	public static final int BUILD = 4;
+	public static String PLUGIN_NAME = "[xApi] ";
 	private static XApi instance;
 	
 	private HashMap<XType, XPlugin> xpluginlist;
@@ -24,6 +25,7 @@ public class XApi extends JavaPlugin
 	@Override
 	public void onDisable()
 	{
+		XUtil.onDisable();
 		xpluginlist.clear();
 	}
 
@@ -35,7 +37,8 @@ public class XApi extends JavaPlugin
 		settings = new SettingManager(this);
 		priority = new PriorityConfig(settings);
 		
-		System.out.println("[xApi] started");
+		XUtil.onEnable();
+		XUtil.info("started");
 		
 		//ExampleListener listener = new ExampleListener(this);
 	}
