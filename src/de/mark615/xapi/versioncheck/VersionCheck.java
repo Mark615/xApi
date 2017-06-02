@@ -54,6 +54,7 @@ public class VersionCheck
 			nodes.put(2, new VersionNode(1, 2));
 			nodes.put(3, new VersionNode(1, 3));
 			nodes.put(4, new VersionNode(1, 3));
+			nodes.put(5, new VersionNode(1, 4));
 			return nodes;
 		}
 		
@@ -61,6 +62,7 @@ public class VersionCheck
 		{
 			nodes.put(1, new VersionNode(2, 2));
 			nodes.put(2, new VersionNode(3, 3));
+			nodes.put(3, new VersionNode(3, 4));
 			return nodes;
 		}
 		
