@@ -45,7 +45,7 @@ public class SettingManager
     
     public boolean hasCheckVersion()
     {
-    	return config.getBoolean("versioncheck", true);
+    	return config.getBoolean("updatecheck", true);
     }
     
     

@@ -7,14 +7,7 @@ import java.net.URL;
 
 import org.bukkit.Bukkit;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
-import de.mark615.xapi.SettingManager;
 import de.mark615.xapi.XApi;
-import de.mark615.xapi.object.Updater.UpdateResult;
-import de.mark615.xapi.object.Updater.UpdateType;
 
 public class XUtil
 {
