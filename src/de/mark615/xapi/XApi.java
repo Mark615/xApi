@@ -7,6 +7,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import de.mark615.xapi.interfaces.XPermissionApi;
 import de.mark615.xapi.interfaces.XPlugin;
 import de.mark615.xapi.interfaces.XSignInApi;
+import de.mark615.xapi.object.Updater;
+import de.mark615.xapi.object.Updater.UpdateResult;
+import de.mark615.xapi.object.Updater.UpdateType;
+import de.mark615.xapi.object.XUtil;
 import de.mark615.xapi.versioncheck.VersionCheck;
 import de.mark615.xapi.versioncheck.VersionCheck.XType;
 
@@ -34,16 +38,35 @@ public class XApi extends JavaPlugin
 	{
 		instance = this;
 		xpluginlist = new HashMap<>();
-		settings = new SettingManager(this);
+		settings = SettingManager.getInstance();
+		settings.setup(this);
 		priority = new PriorityConfig(settings);
 		
 		XUtil.onEnable();
-		XUtil.info("started");
+		updateCheck();
 		
 		//ExampleListener listener = new ExampleListener(this);
 	}
 	
-	public XApi getInstance()
+	private void updateCheck()
+	{
+		if (SettingManager.getInstance().hasCheckVersion())
+		{
+			try
+			{
+				Updater updater = new Updater(this, 267925, this.getFile(), UpdateType.NO_DOWNLOAD, true);
+				if (updater.getResult() == UpdateResult.UPDATE_AVAILABLE) {
+				    XUtil.info("New version available! " + updater.getLatestName());
+				}
+			}
+			catch(Exception e)
+			{
+				XUtil.severe("Can't generate checkUpdate webrequest");
+			}
+		}
+	}
+	
+	public static XApi getInstance()
 	{
 		return instance;
 	}

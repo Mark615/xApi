@@ -1,4 +1,4 @@
-package de.mark615.xapi;
+package de.mark615.xapi.object;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -10,6 +10,11 @@ import org.bukkit.Bukkit;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import de.mark615.xapi.SettingManager;
+import de.mark615.xapi.XApi;
+import de.mark615.xapi.object.Updater.UpdateResult;
+import de.mark615.xapi.object.Updater.UpdateType;
 
 public class XUtil
 {
@@ -43,8 +48,6 @@ public class XUtil
 		{
 			severe("Can't generate onEnable webrequest");
 		}
-		
-		checkUpdate();
 	}
 	
 	public static void onDisable()
@@ -56,23 +59,6 @@ public class XUtil
 		catch(Exception e)
 		{
 			severe("Can't generate onDisable webrequest");
-		}
-	}
-	
-	private static void checkUpdate()
-	{
-		try
-		{
-		    JsonElement jsonelement = new JsonParser().parse(sendGet("checkversion?type=xApi&build=" + XApi.BUILD));
-		    JsonObject json = jsonelement.getAsJsonObject();
-			if (json.has("build") && json.get("build").getAsInt() > XApi.BUILD)
-			{
-				info("A newer version of xApi is avaible. V." + json.get("version").getAsString());
-			}
-		}
-		catch(Exception e)
-		{
-			severe("Can't generate checkUpdate webrequest");
 		}
 	}
 	

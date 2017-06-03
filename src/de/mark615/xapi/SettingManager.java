@@ -8,11 +8,18 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
 public class SettingManager
-{    
+{
+	static SettingManager instance = new SettingManager();
+	
+	public static SettingManager getInstance()
+	{
+		return instance;
+	}
+	
     FileConfiguration config;
     File cFile;
    
-    public SettingManager(Plugin p)
+    public void setup(Plugin p)
     {
     	if (!p.getDataFolder().exists())
     	{
@@ -31,8 +38,14 @@ public class SettingManager
     	
     	//Load default messages
     	InputStream defMessageStream = p.getResource("config.yml");
-    	YamlConfiguration defMessages = YamlConfiguration.loadConfiguration(defMessageStream);
+    	@SuppressWarnings("deprecation")
+		YamlConfiguration defMessages = YamlConfiguration.loadConfiguration(defMessageStream);
 		config.setDefaults(defMessages);
+    }
+    
+    public boolean hasCheckVersion()
+    {
+    	return config.getBoolean("versioncheck", true);
     }
     
     
