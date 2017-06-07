@@ -11,4 +11,9 @@ public interface XSignInApiInterface
 	public boolean loginPlayer(Player sender, Player target, String password);
 	
 	public boolean isPlayerLoggedIn(Player sender, Player target);
+	
+	
+	public boolean isMaintenanceMode();
+	
+	public boolean setMaintenanceMode(boolean value);
 }

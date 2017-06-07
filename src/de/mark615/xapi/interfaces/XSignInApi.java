@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 
 import de.mark615.xapi.PriorityConfigBase;
 import de.mark615.xapi.XApi;
+import de.mark615.xapi.events.MaintenanceSwitchEvent;
 import de.mark615.xapi.events.PlayerFirstjoinEvent;
 import de.mark615.xapi.events.PlayerLoggedInEvent;
 import de.mark615.xapi.events.PlayerPasswordChangedEvent;
@@ -48,6 +49,15 @@ public abstract class XSignInApi extends XPlugin implements XSignInApiInterface
 		if (priorityBase.canCallEvent(PriorityConfigBase.XSIGNIN, PriorityConfigBase.PLAYERLOGGEDIN))
 		{
 			PlayerLoggedInEvent event = new PlayerLoggedInEvent(p);
+			plugin.getServer().getPluginManager().callEvent(event);
+		}
+	}
+	
+	public void createMaintenanceModeSwitchEvent(boolean value)
+	{
+		if (priorityBase.canCallEvent(PriorityConfigBase.XSIGNIN, PriorityConfigBase.MAINTENANCESWITCH))
+		{
+			MaintenanceSwitchEvent event = new MaintenanceSwitchEvent(value);
 			plugin.getServer().getPluginManager().callEvent(event);
 		}
 	}

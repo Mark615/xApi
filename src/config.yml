@@ -12,5 +12,7 @@ priority:
         xsignin: 1
     playerloggedin:
         xsignin: 1
+    maintenanceswitch:
+        xsignin: 1
 
 updatecheck: true

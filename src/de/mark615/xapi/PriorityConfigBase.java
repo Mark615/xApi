@@ -7,6 +7,8 @@ public class PriorityConfigBase
 {
 	public static final String XPERMISSION = "xpermission";
 	public static final String XSIGNIN = "xsignin";
+	public static final String XCHAT = "xchat";
+	public static final String XBAN = "xban";
 
 	public static final String PLAYERFIRSTJOIN = "playerfirstjoin";
 	public static final String PLAYERRANKCHANGED = "playerrankchanged";
@@ -14,6 +16,7 @@ public class PriorityConfigBase
 	public static final String PLAYERPASSWORDCHANGED = "playerpasswordchanged";
 	public static final String PLAYERPASSWORDRESET = "playerpasswordreset";
 	public static final String PLAYERLOGGEDIN = "playerloggedin";
+	public static final String MAINTENANCESWITCH = "maintenanceswitch";
 	
 	protected Map<String, Map<String, Integer>> prioritys;
 	

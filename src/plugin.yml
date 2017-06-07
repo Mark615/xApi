@@ -1,6 +1,6 @@
 name: xApi
 main: de.mark615.xapi.XApi
-version: 1.0.3
+version: 1.0.4
 description: API plugin for the X-Serie
 author: Mark615
 softdepend:

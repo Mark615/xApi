@@ -42,4 +42,14 @@ public class PriorityConfig extends PriorityConfigBase
 	{
 		registerPlugin(PriorityConfigBase.XSIGNIN);
 	}
+	
+	public void registerXChat()
+	{
+		registerPlugin(PriorityConfigBase.XCHAT);
+	}
+	
+	public void registerXBan()
+	{
+		registerPlugin(PriorityConfigBase.XBAN);
+	}
 }
