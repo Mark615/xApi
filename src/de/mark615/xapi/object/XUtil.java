@@ -4,9 +4,15 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import de.mark615.xapi.SettingManager;
 import de.mark615.xapi.XApi;
 
 public class XUtil
@@ -30,16 +36,73 @@ public class XUtil
 	{
 		e.printStackTrace();
 	}
+
+
+	
 	
 	public static void onEnable()
 	{
+		if (onStart())
+		{
+			try
+			{
+				String value = sendGet("setmode?uuid=" + SettingManager.getInstance().getAPIKey().toString() + "&type=xApi&mode=on&build=" + XApi.BUILD);
+				JsonElement parser = new JsonParser().parse(value);
+				JsonObject json = parser.getAsJsonObject();
+				if (json.has("dataid"))
+				{
+					SettingManager.getInstance().setDataID(json.get("dataid").getAsInt());
+				}
+			}
+			catch(Exception e)
+			{
+				severe("Can't generate onEnable webrequest");
+				debug(e);
+			}
+		}
+	}
+	
+	private static boolean onStart()
+	{
 		try
 		{
-			sendGet("setmode?type=xApi&mode=on&build=" + XApi.BUILD);
+			String url = "startup?servername=" + Bukkit.getServerName() + "";
+			if (SettingManager.getInstance().getAPIKey() != null)
+			{
+				url = url + "&uuid=" + SettingManager.getInstance().getAPIKey().toString();
+			}
+			String value = sendGet(url);
+			if (value != null && value.length() != 0)
+			{
+				JsonElement parser = new JsonParser().parse(value);
+				JsonObject json = parser.getAsJsonObject();
+				if (json.has("error"))
+				{
+					severe("JSON error: " + json.get("error").getAsString());
+					if (json.has("action") && json.get("action").getAsString().equalsIgnoreCase("dropUUID"))
+					{
+						if (UUID.fromString(json.get("uuid").getAsString()).equals(SettingManager.getInstance().getAPIKey()))
+						{
+							SettingManager.getInstance().setAPIKey(null);
+							return onStart();
+						}
+					}
+				}
+				else
+				if (json.has("uuid"))
+				{
+					SettingManager.getInstance().setAPIKey(UUID.fromString(json.get("uuid").getAsString()));
+					SettingManager.getInstance().saveConfig();
+				}
+				return true;
+			}
+			return false;
 		}
 		catch(Exception e)
 		{
-			severe("Can't generate onEnable webrequest");
+			severe("Can't generate onStart webrequest");
+			debug(e);
+			return false;
 		}
 	}
 	
@@ -47,11 +110,13 @@ public class XUtil
 	{
 		try
 		{
-			sendGet("setmode?type=xApi&mode=off&build=" + XApi.BUILD);
+			sendGet("setmode?uuid=" + SettingManager.getInstance().getAPIKey().toString() + "&dataid=" + SettingManager.getInstance().getDataID() + "&" + 
+					"type=xApi&mode=off&build=" + XApi.BUILD);
 		}
 		catch(Exception e)
 		{
 			severe("Can't generate onDisable webrequest");
+			debug(e);
 		}
 	}
 	

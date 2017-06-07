@@ -1,11 +1,15 @@
 package de.mark615.xapi;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.UUID;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
+
+import de.mark615.xapi.object.XUtil;
 
 public class SettingManager
 {
@@ -16,8 +20,10 @@ public class SettingManager
 		return instance;
 	}
 	
-    FileConfiguration config;
-    File cFile;
+    private FileConfiguration config;
+    private File cFile;
+    
+    private int dataID;
    
     public void setup(Plugin p)
     {
@@ -43,13 +49,6 @@ public class SettingManager
 		config.setDefaults(defMessages);
     }
     
-    public boolean hasCheckVersion()
-    {
-    	return config.getBoolean("updatecheck", true);
-    }
-    
-    
-   
     public FileConfiguration getConfig()
     {
         return config;
@@ -58,5 +57,42 @@ public class SettingManager
     public void reloadConfig()
     {
     	config = YamlConfiguration.loadConfiguration(cFile);
+    }
+   
+    public void saveConfig()
+    {
+        try {
+            config.save(cFile);
+        }
+        catch (IOException e) {
+        	XUtil.severe("Could not save config.yml!");
+        }
+    }
+    
+    
+    
+    public boolean hasCheckVersion()
+    {
+    	return config.getBoolean("updatecheck", true);
+    }
+    
+    public void setAPIKey(UUID uuid)
+    {
+    	config.set("apikey", uuid.toString());
+    }
+    
+    public UUID getAPIKey()
+    {
+    	return config.getString("apikey", null) == null ? null : UUID.fromString(config.getString("apikey"));
+    }
+    
+    public void setDataID(int dataID)
+    {
+    	this.dataID = dataID;
+    }
+    
+    public int getDataID()
+    {
+    	return dataID;
     }
 }
