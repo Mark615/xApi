@@ -14,9 +14,13 @@ import com.google.gson.JsonParser;
 
 import de.mark615.xapi.SettingManager;
 import de.mark615.xapi.XApi;
+import de.mark615.xapi.object.Updater.UpdateResult;
+import de.mark615.xapi.object.Updater.UpdateType;
 
 public class XUtil
 {
+	private static boolean jsonMessage = false;
+	
 	public static void info(String info)
 	{
 		Bukkit.getLogger().info(XApi.PLUGIN_NAME + info);
@@ -37,29 +41,65 @@ public class XUtil
 		e.printStackTrace();
 	}
 
+	
+	
+	public static void updateCheck(final XApi plugin)
+	{
+		Bukkit.getServer().getScheduler().runTaskTimer(plugin, new Runnable()
+		{
+			@Override
+			public void run()
+			{
+				if (SettingManager.getInstance().hasCheckVersion())
+				{
+					try
+					{
+						Updater updater = new Updater(plugin, 267925, plugin.getDataFolder(), UpdateType.NO_DOWNLOAD, true);
+						if (updater.getResult() == UpdateResult.UPDATE_AVAILABLE) {
+						    XUtil.info("New version available! " + updater.getLatestName());
+						}
+					}
+					catch(Exception e)
+					{
+						XUtil.severe("Can't check version at Bukkit.com");
+					}
+				}
+			}
+		}, 20, 6 * 60 * 60 * 20);
+	}	
 
 	
 	
 	public static void onEnable()
 	{
-		if (onStart())
+		if (!jsonMessage)
+			return;
+		
+		Bukkit.getServer().getScheduler().runTaskAsynchronously(XApi.getInstance(), new Runnable()
 		{
-			try
+			@Override
+			public void run()
 			{
-				String value = sendGet("setmode?uuid=" + SettingManager.getInstance().getAPIKey().toString() + "&type=xApi&mode=on&build=" + XApi.BUILD);
-				JsonElement parser = new JsonParser().parse(value);
-				JsonObject json = parser.getAsJsonObject();
-				if (json.has("dataid"))
+				if (onStart())
 				{
-					SettingManager.getInstance().setDataID(json.get("dataid").getAsInt());
-				}
+					try
+					{
+						String value = sendGet("setmode?uuid=" + SettingManager.getInstance().getAPIKey().toString() + "&type=xApi&mode=on&build=" + XApi.BUILD);
+						JsonElement parser = new JsonParser().parse(value);
+						JsonObject json = parser.getAsJsonObject();
+						if (json.has("dataid"))
+						{
+							SettingManager.getInstance().setDataID(json.get("dataid").getAsInt());
+						}
+					}
+					catch(Exception e)
+					{
+						severe("Can't generate onEnable webrequest");
+						debug(e);
+					}
+				}			
 			}
-			catch(Exception e)
-			{
-				severe("Can't generate onEnable webrequest");
-				debug(e);
-			}
-		}
+		});
 	}
 	
 	private static boolean onStart()
@@ -108,6 +148,8 @@ public class XUtil
 	
 	public static void onDisable()
 	{
+		if (!jsonMessage)
+			return;
 		try
 		{
 			sendGet("setmode?uuid=" + SettingManager.getInstance().getAPIKey().toString() + "&dataid=" + SettingManager.getInstance().getDataID() + "&" + 

@@ -61,4 +61,40 @@ public abstract class XSignInApi extends XPlugin implements XSignInApiInterface
 			plugin.getServer().getPluginManager().callEvent(event);
 		}
 	}
+	
+	public void createPlayerAGBEvent(Player p, boolean value)
+	{
+		
+	}
+	
+	public void createElementAddedToWhitelist(String value, String type)
+	{
+		
+	}
+	
+	public void createElementRemovedToWhitelist(String value, String type)
+	{
+		
+	}
+	
+	public void createElementAddedToBlacklist(String value, String type)
+	{
+		
+	}
+	
+	public void createElementRemovedToBlacklist(String value, String type)
+	{
+		
+	}
+	
+	public void createWhitelistChangedStateEvent(boolean value)
+	{
+		
+	}
+	
+	public void createBlacklistChangedStateEvent(boolean value)
+	{
+		
+	}
+	
 }
