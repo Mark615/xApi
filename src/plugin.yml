@@ -3,6 +3,4 @@ main: de.mark615.xapi.XApi
 version: 1.0.5
 description: API plugin for the X-Serie
 author: Mark615
-
-commands:
-permissions:
+loadbefore: [xPermission, xChat, xSignIn, xBan, xQuest]
