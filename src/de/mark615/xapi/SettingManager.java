@@ -1,8 +1,9 @@
 package de.mark615.xapi;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.UUID;
 
 import org.bukkit.configuration.file.FileConfiguration;
@@ -28,25 +29,26 @@ public class SettingManager
     public void setup(Plugin p)
     {
     	if (!p.getDataFolder().exists())
-    	{
     		p.getDataFolder().mkdir();
-    	}
     	
+    	//load config
     	cFile = new File(p.getDataFolder(), "config.yml");
     	if(!cFile.exists())
-    	{
     		p.saveResource("config.yml", true);
-    	}
-    	
-    	//Store it
-    	config = YamlConfiguration.loadConfiguration(cFile);
-    	config.options().copyDefaults(true);
-    	
-    	//Load default messages
-    	InputStream defMessageStream = p.getResource("config.yml");
-    	@SuppressWarnings("deprecation")
-		YamlConfiguration defMessages = YamlConfiguration.loadConfiguration(defMessageStream);
-		config.setDefaults(defMessages);
+		config = YamlConfiguration.loadConfiguration(cFile);
+		config.options().copyDefaults(true);
+		
+		//Load default config
+		try
+		{
+			BufferedReader br = new BufferedReader(new InputStreamReader(p.getResource("config.yml"), "UTF-8"));
+			YamlConfiguration defConfig = YamlConfiguration.loadConfiguration(br);
+			config.setDefaults(defConfig);	
+		}
+		catch(Exception e)
+		{
+			XUtil.severe("cant copy default config.yml", e);
+		}
     }
     
     public FileConfiguration getConfig()

@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -36,6 +37,12 @@ public class XUtil
 		Bukkit.getLogger().severe(XApi.PLUGIN_NAME + severe);
 	}
 	
+	public static void severe(String severe, Exception e)
+	{
+		severe(severe);
+		e.printStackTrace();
+	}
+	
 	public static void debug(Exception e)
 	{
 		e.printStackTrace();
@@ -43,7 +50,7 @@ public class XUtil
 
 	
 	
-	public static void updateCheck(final XApi plugin)
+	public static void updateCheck(final JavaPlugin plugin)
 	{
 		Bukkit.getServer().getScheduler().runTaskTimer(plugin, new Runnable()
 		{

@@ -55,7 +55,7 @@ public class XApi extends JavaPlugin
 		
 		XUtil.onEnable();
 		XUtil.updateCheck(this);
-		
+		XUtil.info("Enabled Build " + BUILD);
 		//ExampleListener listener = new ExampleListener(this);
 	}
 	
