@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.UUID;
 
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
@@ -96,5 +97,15 @@ public class SettingManager
     public int getDataID()
     {
     	return dataID;
+    }
+    
+    public ConfigurationSection getXManagerSection()
+    {
+    	return config.getConfigurationSection("xmanager");
+    }
+    
+    public void setXManagerValue(String path, Object value)
+    {
+    	config.set("xmanager." + path, value);
     }
 }

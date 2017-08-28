@@ -17,14 +17,14 @@ import de.mark615.xapi.versioncheck.VersionCheck.XType;
 
 public class XApi extends JavaPlugin
 {
-	public static final int BUILD = 6;
+	public static final int BUILD = 7;
 	public static String PLUGIN_NAME = "[xApi] ";
 	private static XApi instance;
 	
 	private HashMap<XType, XPlugin> xpluginlist;
 	
-	private PriorityConfig priority;
 	private SettingManager settings;
+	private XManagerConnector xmanager;
 	
 	@Override
 	public void onDisable()
@@ -40,7 +40,7 @@ public class XApi extends JavaPlugin
 		xpluginlist = new HashMap<>();
 		settings = SettingManager.getInstance();
 		settings.setup(this);
-		priority = new PriorityConfig(settings);
+		xmanager = new XManagerConnector(this);
 		
 		
 		Bukkit.getServer().getScheduler().runTaskLater(this, new Runnable() {
@@ -71,38 +71,33 @@ public class XApi extends JavaPlugin
 	
 	
 	
-	public PriorityConfigBase getPriorityConfig()
-	{
-		return priority;
-	}
-	
 	public void registerXPermission(XPermissionApi api)
 	{
 		xpluginlist.put(XType.xPermission, api);
-		priority.registerXPermission();
 	}
 	
 	public void registerXSignIn(XSignInApi api)
 	{
 		xpluginlist.put(XType.xSignIn, api);
-		priority.registerXSignIn();
 	}
 	
 	public void registerXChat(XChatApi api)
 	{
 		xpluginlist.put(XType.xChat, api);
-		priority.registerXChat();
 	}
 	
 	public void registerXBan(XBanApi api)
 	{
 		xpluginlist.put(XType.xBan, api);
-		priority.registerXBan();
 	}
 	
 	public XPlugin getXPlugin(XType type)
 	{
 		return xpluginlist.get(type);
 	}
-
+	
+	protected XManagerConnector getXManagerConnector()
+	{
+		return xmanager;
+	}
 }

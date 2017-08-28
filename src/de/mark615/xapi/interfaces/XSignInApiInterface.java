@@ -1,6 +1,7 @@
 package de.mark615.xapi.interfaces;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.bukkit.entity.Player;
 
@@ -40,4 +41,9 @@ public interface XSignInApiInterface
 	public boolean addElementToBlacklist(String value, String type);
 
 	public boolean removeElementToBlacklist(String value, String type);
+
+	
+	public UUID getUUIDfromIP(String ip);
+	
+	public String getNamefromIP(String ip);
 }

@@ -1,18 +1,6 @@
-priority:
-    playerfirstjoin:
-        xpermission: 2
-        xsignin: 1
-    playerrankchanged:
-        xpermission: 1
-    playerautorankingchanged:
-        xpermission: 1
-    playerpasswordchanged:
-        xsignin: 1
-    playerpasswordreset:
-        xsignin: 1
-    playerloggedin:
-        xsignin: 1
-    maintenanceswitch:
-        xsignin: 1
+xManager:
+    serverdisplayname: 'Minecraft Server'
+    ip: localhost
+    port: 25560
 
 updatecheck: true

@@ -54,9 +54,9 @@ public class VersionCheck
 			nodes.put(2, new VersionNode(1, 2));
 			nodes.put(3, new VersionNode(1, 3));
 			nodes.put(4, new VersionNode(1, 3));
-			nodes.put(5, new VersionNode(1, 6));
-			nodes.put(6, new VersionNode(1, 6));
-			nodes.put(8, new VersionNode(1, 6));
+			nodes.put(5, new VersionNode(1, 7));
+			nodes.put(6, new VersionNode(1, 7));
+			nodes.put(8, new VersionNode(1, 7));
 			return nodes;
 		}
 		
@@ -65,20 +65,21 @@ public class VersionCheck
 			nodes.put(1, new VersionNode(2, 2));
 			nodes.put(2, new VersionNode(3, 3));
 			nodes.put(3, new VersionNode(3, 5));
-			nodes.put(4, new VersionNode(5, 5));
-			nodes.put(5, new VersionNode(5, 5));
-			nodes.put(6, new VersionNode(5, 6));
+			nodes.put(4, new VersionNode(5, 6));
+			nodes.put(5, new VersionNode(5, 6));
+			nodes.put(6, new VersionNode(7, 7));
 			return nodes;
 		}
 		
 		if (type == XType.xChat)
 		{
-			nodes.put(1, new VersionNode(5, 6));
+			nodes.put(1, new VersionNode(7, 7));
 			return nodes;
 		}
 		
 		if (type == XType.xBan)
 		{
+			nodes.put(1, new VersionNode(7, 7));
 			return null;
 		}
 		
